@@ -126,6 +126,36 @@ colors:
 
 > A workflow is a YAML file configured at the repository level. It contains at least one job and starts when one of its configured triggers occurs.
 
+### Triggers
+
+```yaml
+on:
+  push:
+  workflow_dispatch:
+```
+
+> The `on` key lists the events that start a workflow. `push` runs the workflow when commits or tags are pushed, and `workflow_dispatch` enables a manual run from the **Run workflow** button in the repository's **Actions** tab.
+
+> `workflow_dispatch:` has no inputs in this example. The workflow file must be on the default branch before GitHub shows its manual-run button.
+
+### Empty trigger configuration
+
+> YAML permits a key with no value; its value is `null`. GitHub Actions treats an empty event configuration as a request to enable that event with its default behavior.
+
+```yaml
+on: [push, workflow_dispatch]
+```
+
+> This list syntax is equivalent to the previous mapping when neither event needs additional configuration.
+
+```yaml
+on:
+  push:
+    branches: [main]
+```
+
+> Add nested values only when the event needs configuration. This example restricts the `push` trigger to the `main` branch.
+
 ### Jobs
 
 > Jobs are defined under the workflow's `jobs` key. Each job specifies its execution environment with `runs-on` and runs in parallel with other jobs by default unless dependencies are declared with `needs`.

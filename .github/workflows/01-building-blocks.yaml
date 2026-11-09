@@ -1,7 +1,7 @@
 name: workflow-a
 
 on:
-  push:
+#  push:
   workflow_dispatch:
 
 jobs:
