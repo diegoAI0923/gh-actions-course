@@ -194,4 +194,20 @@ steps:
 
 > A step is one list item. Its `name` and `run` properties must be indented beneath the same hyphen. A step must provide `run` or `uses`; `name` alone is not executable.
 
-**Key takeaway:** Workflows coordinate jobs, jobs select a runner and organize steps, and steps perform the individual actions or commands.
+### Actions within steps
+
+```yaml
+- uses: actions/checkout@v4
+```
+
+> An Action is reusable code that performs a task within a step. The `uses` key tells GitHub Actions which action and version to run; `actions/checkout@v4`, for example, checks the repository's code out onto the runner.
+
+> Actions can be JavaScript actions, Docker container actions, or composite actions. In contrast, a step with `run` executes shell commands directly on the runner.
+
+### Step failures
+
+> If a step exits with a non-zero status code, GitHub Actions marks the job as failed and skips its remaining steps by default.
+
+> A later step can be configured to run after a failure with a conditional such as `if: always()`, but that is an exception to the default behavior.
+
+**Key takeaway:** Workflows coordinate jobs, jobs select a runner and organize steps, and steps perform the individual actions or commands. A failed step stops the remaining steps in its job by default.
